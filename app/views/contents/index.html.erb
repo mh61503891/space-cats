@@ -1,0 +1,44 @@
+<%= render('shared/alert_flash') %>
+
+<%= form_with(html: { class: 'form-inline mb-3' }) do |f| %>
+<div class="input-group">
+  <input type="text" class="form-control" placeholder="Search">
+  <div class="input-group-append">
+    <button class="btn btn-primary" type="button">Button</button>
+  </div>
+</div>
+<% end %>
+
+<%= form_with({
+  local: true,
+  method: :post,
+  url: contents_path,
+  html: {
+    class: %w[form-inline mb-3]
+  }}) do |f| %>
+<div class="input-group">
+  <%= f.text_field :uri, class: %w[form-control], placeholder: 'URL', value: 'https://www.publickey1.jp/blog/18/awsopenjdkamazon_correttoawsjavajava_82023java_112024lts.html' %>
+  <div class="input-group-append">
+    <%= f.button 'Add', class: %w[btn btn-primary] %>
+  </div>
+</div>
+<% end %>
+
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">Open Graph Title</th>
+      <th scope="col">Open Graph Image</th>
+      <th scope="col">Created at</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @contents.each do |content| %>
+  <tr>
+    <td><%= link_to content.open_graph_title, content.uri %></td>
+    <td><img width="100" src="<%= content.open_graph_image_url %>"></td>
+    <td><%= content.created_at %></td>
+  </tr>
+  <% end %>
+  </tbody>
+</table>
