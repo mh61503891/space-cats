@@ -29,6 +29,10 @@ gem 'webpacker'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'addressable', '~> 2.5'
+gem 'faraday', '~> 0.15'
+gem 'ogp', '~> 0.2'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
