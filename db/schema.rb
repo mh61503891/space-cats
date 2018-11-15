@@ -10,10 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_15_191732) do
+ActiveRecord::Schema.define(version: 2018_11_15_211458) do
 
   create_table "contents", force: :cascade do |t|
-    t.string "uri"
+    t.string "url"
     t.string "open_graph_title"
     t.string "open_graph_type"
     t.string "open_graph_url"
@@ -23,7 +23,22 @@ ActiveRecord::Schema.define(version: 2018_11_15_191732) do
     t.string "open_graph_site_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["uri"], name: "index_contents_on_uri", unique: true
+    t.index ["url"], name: "index_contents_on_url", unique: true
+  end
+
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer "priority", default: 0, null: false
+    t.integer "attempts", default: 0, null: false
+    t.text "handler", null: false
+    t.text "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string "locked_by"
+    t.string "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
   create_table "settings", force: :cascade do |t|

@@ -7,7 +7,7 @@ class InitSchema < ActiveRecord::Migration[5.2]
     end
 
     create_table :contents do |t|
-      t.string :uri
+      t.string :url
       t.string :open_graph_title
       t.string :open_graph_type
       t.string :open_graph_url
@@ -17,7 +17,7 @@ class InitSchema < ActiveRecord::Migration[5.2]
       t.string :open_graph_site_name
       t.timestamps null: false
     end
-    add_index :contents, :uri, unique: true
+    add_index :contents, :url, unique: true
 
   end
 end

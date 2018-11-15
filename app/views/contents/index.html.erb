@@ -17,7 +17,7 @@
     class: %w[form-inline mb-3]
   }}) do |f| %>
 <div class="input-group">
-  <%= f.text_field :uri, class: %w[form-control], placeholder: 'URL', value: 'https://www.publickey1.jp/blog/18/awsopenjdkamazon_correttoawsjavajava_82023java_112024lts.html' %>
+  <%= f.text_field :url, class: %w[form-control], placeholder: 'URL', value: 'https://www.publickey1.jp/blog/18/awsopenjdkamazon_correttoawsjavajava_82023java_112024lts.html' %>
   <div class="input-group-append">
     <%= f.button 'Add', class: %w[btn btn-primary] %>
   </div>
@@ -35,7 +35,7 @@
   <tbody>
   <% @contents.each do |content| %>
   <tr>
-    <td><%= link_to content.open_graph_title, content.uri %></td>
+    <td><%= link_to content.open_graph_title, content.url %></td>
     <td><img width="100" src="<%= content.open_graph_image_url %>"></td>
     <td><%= content.created_at %></td>
   </tr>

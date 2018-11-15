@@ -32,6 +32,10 @@ gem 'webpacker'
 gem 'addressable', '~> 2.5'
 gem 'faraday', '~> 0.15'
 gem 'ogp', '~> 0.2'
+gem 'delayed_job_active_record'
+gem 'daemons'
+gem 'foreman'
+gem 'delayed_job_web'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
