@@ -1,0 +1,46 @@
+<nav class="navbar navbar-expand-sm navbar-light bg-light">
+  <%= link_to 'Space Cats', root_path, class: %w[navbar-brand] %>
+  <div class="navbar-collapse">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <%= link_to keywords_path, class: %w[nav-link d-sm-none d-md-inline-block] do %>
+          <span class="text-nowrap">Keywords</span>
+        <% end %>
+        <%= link_to keywords_path, class: %w[nav-link d-none d-sm-inline-block d-md-none], title: 'Keywords', 'data-toggle': 'tooltip', 'data-placement': 'bottom' do %>
+          <i class="fa fa-tags fa-fw" aria-hidden="true"></i>
+        <% end %>
+      </li>
+
+      <li class="nav-item">
+        <%= link_to pages_path, class: %w[nav-link d-sm-none d-md-inline-block] do %>
+          <span class="text-nowrap">Pages</span>
+        <% end %>
+        <%= link_to pages_path, class: %w[nav-link d-none d-sm-inline-block d-md-none], title: 'Pages', 'data-toggle': 'tooltip', 'data-placement': 'bottom' do %>
+          <i class="fa fa-file-text-o fa-fw" aria-hidden="true"></i>
+        <% end %>
+      </li>
+
+
+      <li class="nav-item">
+        <a class="nav-link d-sm-none d-md-inline-block" href="/images">
+          <span class="text-nowrap">Images</span>
+        </a>
+        <a class="nav-link d-none d-sm-inline-block d-md-none" data-toggle="tooltip" data-placement="bottom" titlgese="Pa" href="/images">
+          <i class="fa fa-search fa-fw" aria-hidden="true"></i>
+        </a>
+      </li>
+
+
+
+      <li class="nav-item">
+        <a class="nav-link d-sm-none d-md-inline-block" href="/jobs" target="_blank">
+          <span class="text-nowrap">Jobs</span>
+        </a>
+        <a class="nav-link d-none d-sm-inline-block d-md-none" data-toggle="tooltip" data-placement="bottom" title="Jobs" href="/jobs" target="_blank">
+          <i class="fa fa-calendar fa-fw" aria-hidden="true"></i>
+        </a>
+      </li>
+
+    </ul>
+  </div>
+</nav>

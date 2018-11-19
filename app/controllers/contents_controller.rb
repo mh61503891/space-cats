@@ -7,8 +7,22 @@ class ContentsController < ApplicationController
 
   # POST /contents
   def create
-    FetchJob.perform_later(params[:url])
-    redirect_to :contents
+    @query = params[:query]
+    if @query.present?
+      @contents = Content.search(@query).order(updated_at: :desc)
+      render :index
+    end
+    if params[:url].present?
+      @contents = Content.order(updated_at: :desc)
+      FetchJob.perform_now(params[:url])
+      #render :index
+      redirect_to :contents
+    end
+  end
+
+  # GET /contents/:id
+  def show
+    @content = Content.find_by!(id: params[:id])
   end
 
 end

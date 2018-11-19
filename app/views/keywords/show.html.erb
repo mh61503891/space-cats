@@ -1,36 +1,8 @@
-<%= render('shared/alert_flash') %>
-
-<%= form_with({
-  local: true,
-  method: :post,
-  url: contents_path,
-  html: {
-    class: %w[form-inline mb-3]
-  }}) do |f| %>
-<div class="input-group">
-  <%= f.text_field :query, class: %w[form-control], placeholder: 'Keywords', autocomplete: 'off', value: @query %>
-  <div class="input-group-append">
-    <%= f.button 'Search', class: %w[btn btn-primary] %>
-  </div>
-</div>
-<% end %>
-
-<%= form_with({
-  local: true,
-  method: :post,
-  url: contents_path,
-  html: {
-    class: %w[form-inline mb-3]
-  }}) do |f| %>
-<div class="input-group">
-  <%= f.text_field :url, class: %w[form-control], placeholder: 'URL', autocomplete: 'off' %>
-  <div class="input-group-append">
-    <%= f.button 'Add', class: %w[btn btn-primary] %>
-  </div>
-</div>
-<% end %>
-
-<% @contents.each do |content| %>
+<h3><%= @keyword.name %> (<%= @keyword.contents.size %>)</h3>
+<hr>
+<%= button_to "Delete", @keyword, method: :delete, class: %w[btn btn-danger] %>
+<hr>
+<% @keyword.contents.each do |content| %>
 <div class="media">
   <% if content.abstract_data_id.present? %>
     <%= image_tag(blob_url(id: content.abstract_data_id), class: %w[align-self-start mr-2 img-thumbnail], size: '64x64') %>

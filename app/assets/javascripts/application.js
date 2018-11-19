@@ -10,7 +10,13 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require jquery
+//= require moment/moment
+//= require moment/locale/ja
 //= require bootstrap/dist/js/bootstrap
-//= require rails-ujs
+//= require bootstrap-table/dist/bootstrap-table
+//= require bootstrap-table/dist/extensions/mobile/bootstrap-table-mobile
+//= require bootstrap-table/dist/locale/bootstrap-table-en-US
+//= require bootstrap-table/dist/locale/bootstrap-table-ja-JP
 //= require activestorage
 //= require_tree .

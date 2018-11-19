@@ -1,0 +1,12 @@
+<div class="row">
+  <% @images.each do |image| %>
+  <div class="col-4">
+    <div class="card">
+      <%= link_to(image_tag(image_image_url(image_id: image.id), class: %w[card-img-top]), image.url, target: '_blank') %>
+      <div class="card-body">
+        <p class="card-text text-right"><%= link_to(image.created_at, image) %></p>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
