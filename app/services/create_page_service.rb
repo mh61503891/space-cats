@@ -80,7 +80,25 @@ class CreatePageService
     # @param [Addressable::URI] uri
     # @return [MetaInspector::Document]
     def wget(uri)
-      MetaInspector.new(uri, allow_non_html_content: true)
+      ImageInspectorDocument.new(uri)
     end
+
+end
+
+# @see MetaInspector::Document
+# @note https://techcommunity.microsoft.com/t5/Identity-Standards-Blog/All-about-FIDO2-CTAP2-and-WebAuthn/ba-p/288910 contains imaegs which is provided with a HTTP response including Content-Type `image/png;charset=UTF-8`. Because the faraday-encoding.gem try to encode binary data as UTF-8, respons.body.tr causes a ArgumentError: invalid byte sequence in UTF-8.
+class ImageInspectorDocument
+
+  attr_reader :url, :response
+
+  def initialize(url)
+    @url = url
+    @response = Faraday.get(@url)
+  end
+
+  def content_type
+   return nil if response.headers['content-type'].nil?
+   response.headers['content-type'].split(';')[0] if response
+  end
 
 end
