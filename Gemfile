@@ -37,6 +37,7 @@ gem 'font-awesome-rails', '~> 4.7'
 gem 'metainspector', '~> 5.6'
 gem 'mime-types', '~> 3.2'
 gem 'ancestry', '~> 3.0'
+gem 'kaminari', '~> 1.1'
 
 gem 'bootsnap', '>= 1.1.0', require: false
 

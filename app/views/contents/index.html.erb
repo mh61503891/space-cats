@@ -30,6 +30,8 @@
 </div>
 <% end %>
 
+<p><%= page_entries_info @contents %></p>
+
 <% @contents.each do |content| %>
 <div class="media">
   <% if content.abstract_data_id.present? %>
@@ -49,3 +51,5 @@
   </div>
 </div>
 <% end %>
+
+<%= paginate @contents %>

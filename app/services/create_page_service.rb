@@ -19,7 +19,7 @@ class CreatePageService
     # @return [Hash]
     def content_params(page)
       return {
-        media_type: 'page',
+        media_type: 'document',
         url: Addressable::URI.parse(page.url),
         canonical_url: Content.canonize(Addressable::URI.parse(page.url)),
         og_title: page.best_title,

@@ -1,6 +1,6 @@
 class Content < ApplicationRecord
 
-  enum media_type: { page: 0, image: 1 }
+  enum media_type: { document: 0, image: 1 }
 
   belongs_to :data, class_name: 'Blob', foreign_key: 'data_id'
   belongs_to :abstract_data, class_name: 'Blob', foreign_key: 'abstract_data_id', optional: true
