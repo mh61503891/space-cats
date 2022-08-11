@@ -1,14 +1,16 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.5.3'
+ruby '3.1.2'
 
-gem 'rails', '~> 5.2.1'
-gem 'sqlite3'
-gem 'puma', '~> 3.11'
-gem 'sass-rails', '~> 5.0'
-gem 'uglifier', '>= 1.3.0'
-gem 'webpacker'
+gem "rails", "~> 7.0.3", ">= 7.0.3.1"
+gem "sqlite3", "~> 1.4"
+gem "puma", "~> 5.0"
+gem "sprockets-rails"
+
+# gem 'sass-rails', '~> 5.0'
+# gem 'uglifier', '>= 1.3.0'
+# gem 'webpacker'
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
@@ -27,7 +29,7 @@ gem 'webpacker'
 
 gem 'addressable', '~> 2.5'
 gem 'faraday', '~> 0.15'
-gem 'ogp', '~> 0.2'
+# gem 'ogp', '~> 0.2'
 gem 'delayed_job_active_record', '~> 4.1'
 gem 'daemons', '~> 1.2'
 gem 'foreman', '~> 0.64'
@@ -40,6 +42,11 @@ gem 'ancestry', '~> 3.0'
 gem 'kaminari', '~> 1.1'
 
 gem 'bootsnap', '>= 1.1.0', require: false
+
+gem "bootstrap"
+gem "jquery-rails"
+gem "font-awesome-sass", "~> 6.1.1"
+
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

@@ -1,12 +1,12 @@
 <%= render('shared/alert_flash') %>
 
-<%= form_with({
+<%= form_with(
   local: true,
   method: :post,
   url: pages_path,
   html: {
     class: %w[form-inline mb-3]
-  }}) do |f| %>
+  }) do |f| %>
 <div class="input-group">
   <%= f.text_field :query, class: %w[form-control], placeholder: 'Keywords', autocomplete: 'off' %>
   <div class="input-group-append">
