@@ -1,61 +1,70 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item" aria-current="page">
+      <%= link_to "Contents", contents_path %>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">
+      <%= @content.og_title %>
+    </li>
+  </ol>
+</nav>
 <p class="lead"><strong><%= @content.og_title %></strong></p>
 <p class="text-center">
-
-<% if @content.abstract_data_id.present? %>
-  <%= image_tag(blob_url(id: @content.abstract_data_id), class: %w[img-fluid img-thumbnail]) %>
-<% else %>
-  <%= image_tag(blank_blobs_url, class: %w[img-fluid img-thumbnail], size: '64x64') %>
-<% end %>
+  <% if @content.abstract_data_id.present? %>
+    <%= image_tag(blob_url(id: @content.abstract_data_id), class: %w[img-fluid img-thumbnail]) %>
+  <% else %>
+    <%= image_tag(blank_blobs_url, class: %w[img-fluid img-thumbnail], size: "64x64") %>
+  <% end %>
 </p>
-<form>
-  <div class="form-group row">
-     <label class="col-form-label col-sm-2"><strong>URL</strong></label>
-     <p class="form-control-plaintext col-sm-10">
-       <%= link_to @content.url, @content.url, target: '_blank' %>
-     </p>
-  </div>
-  <div class="form-group row">
-     <label class="col-form-label col-sm-2"><strong>Canonical URL</strong></label>
-     <p class="form-control-plaintext col-sm-10">
-       <%= link_to @content.canonical_url, @content.canonical_url, target: '_blank' %>
-     </p>
-  </div>
-  <div class="form-group row">
-     <label class="col-form-label col-sm-2"><strong>Site Name</strong></label>
-     <p class="form-control-plaintext col-sm-10"><%= @content.og_site_name %></p>
-  </div>
-  <div class="form-group row">
-     <label class="col-form-label col-sm-2"><strong>Title</strong></label>
-     <p class="form-control-plaintext col-sm-10"><%= @content.og_title %></p>
-  </div>
-  <div class="form-group row">
-     <label class="col-form-label col-sm-2"><strong>Description</strong></label>
-     <p class="form-control-plaintext col-sm-10"><%= @content.og_description %></p>
-  </div>
-  <div class="form-group row">
-     <label class="col-form-label col-sm-2"><strong>Labels</strong></label>
-     <div class="form-control-plaintext col-sm-10">
-       <ul>
-       <% @content.keywords.each do |keyword| %>
-         <li><%= link_to keyword.name, keyword_path(keyword) %> (<%= keyword.contents.size %>)</li>
-       <% end %>
-       </ul>
-     </div>
-  </div>
-  <div class="form-group row">
-     <label class="col-form-label col-sm-2"><strong>Created at</strong></label>
-     <p class="form-control-plaintext col-sm-10"><%= @content.created_at %></p>
-  </div>
-  <div class="form-group row">
-     <label class="col-form-label col-sm-2"><strong>Updated at</strong></label>
-     <p class="form-control-plaintext col-sm-10"><%= @content.updated_at %></p>
-  </div>
-</form>
-
+<dl class="row">
+  <dt class="col-sm-3">URL</dt>
+  <dd class="col-sm-9"><%= link_to(@content.url, @content.url, target: "_blank", class: %w[form-control-plaintext col-sm-10]) %></dd>
+  <dt class="col-sm-3">Canonical URL</dt>
+  <dd class="col-sm-9"><%= link_to(@content.canonical_url, @content.canonical_url, target: "_blank") %></dd>
+  <dt class="col-sm-3">Site Name</dt>
+  <dd class="col-sm-9"><%= @content.og_site_name %></dd>
+  <dt class="col-sm-3">Title</dt>
+  <dd class="col-sm-9"><%= @content.og_title %></dd>
+  <dt class="col-sm-3">Description</dt>
+  <dd class="col-sm-9"><%= @content.og_description %></dd>
+  <dt class="col-sm-3">Labels</dt>
+  <dd class="col-sm-9">
+    <ul>
+      <% @content.keywords.each do |keyword| %>
+        <li><%= link_to keyword.name, keyword_path(keyword) %> (<%= keyword.contents.size %>)</li>
+      <% end %>
+    </ul>
+  </dd>
+  <dt class="col-sm-3">Created at</dt>
+  <dd class="col-sm-9"><%= @content.created_at %></dd>
+  <dt class="col-sm-3">Updated at</dt>
+  <dd class="col-sm-9"><%= @content.updated_at %></dd>
+  <dt class="col-sm-3">Notes</dt>
+</dl>
 <% if Addressable::URI.parse(@content.url).host == 'www.slideshare.net' %>
-<div style="margin-bottom:5px">
-  <strong>
-    <a href="//www.slideshare.net/carologic/ai-and-machine-learning-demystified-by-carol-smith-at-midwest-ux-2017" title="AI and Machine Learning Demystified by Carol Smith at Midwest UX 2017" target="_blank">AI and Machine Learning Demystified by Carol Smith at Midwest UX 2017</a>
-  </strong> de <strong><a href="https://www.slideshare.net/carologic" target="_blank">Carol Smith</a></strong>
-</div>
+  <div style="margin-bottom:5px">
+    <strong>
+      <a href="//www.slideshare.net/carologic/ai-and-machine-learning-demystified-by-carol-smith-at-midwest-ux-2017" title="AI and Machine Learning Demystified by Carol Smith at Midwest UX 2017" target="_blank">AI and Machine Learning Demystified by Carol Smith at Midwest UX 2017</a>
+    </strong> de <strong><a href="https://www.slideshare.net/carologic" target="_blank">Carol Smith</a></strong>
+  </div>
 <% end %>
+<hr>
+<h2>Notes</h2>
+<%= link_to(
+  "New note",
+  new_content_note_path(@content),
+  class: %w[btn btn-primary],
+  data: { turbo_frame: dom_id(@content.notes.build) }
+) %>
+<%= turbo_frame_tag(@content.notes.build) %>
+<div id="notes" class="d-grid py-3 gap-3">
+  <%= render(
+    partial: "contents/notes/note",
+    collection: @content.notes.order(created_at: :desc),
+    as: :note,
+    locals: { content: @content }
+  ) %>
+</div>
+<div id="flash">
+  <%= render partial: "shared/flash" %>
+</div>

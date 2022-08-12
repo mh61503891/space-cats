@@ -4,9 +4,14 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.1.2'
 
 gem "rails", "~> 7.0.3", ">= 7.0.3.1"
+gem "sprockets-rails"
 gem "sqlite3", "~> 1.4"
 gem "puma", "~> 5.0"
-gem "sprockets-rails"
+gem "jsbundling-rails"
+gem "turbo-rails"
+gem "stimulus-rails"
+gem "cssbundling-rails"
+gem "importmap-rails"
 
 # gem 'sass-rails', '~> 5.0'
 # gem 'uglifier', '>= 1.3.0'
@@ -34,7 +39,6 @@ gem 'daemons'
 gem 'foreman'
 gem 'delayed_job_web'
 gem 'search_cop'
-gem 'font-awesome-rails'
 gem 'metainspector'
 gem 'mime-types'
 gem 'ancestry'
@@ -42,10 +46,8 @@ gem 'kaminari'
 
 gem 'bootsnap', '>= 1.1.0', require: false
 
-gem "bootstrap"
+# gem "bootstrap"
 gem "jquery-rails"
-gem "font-awesome-sass"
-
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

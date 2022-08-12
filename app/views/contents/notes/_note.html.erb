@@ -1,0 +1,4 @@
+<div id="<%= dom_id(note) %>" class="card">
+  <p><%= note.body %></p>
+   <%= button_to "Destroy note", [content, note], method: :delete, class: %w[btn btn-sm btn-outline-danger], form: { data: { turbo_confirm: "Are you sure?" } } %>
+</div>

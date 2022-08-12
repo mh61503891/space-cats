@@ -1,6 +1,8 @@
-@import "font-awesome";
-@import "bootstrap";
+// @import "bootstrap";
  
+@import "bootstrap/scss/bootstrap";
+@import "bootstrap-icons/font/bootstrap-icons";
+
 /* @see https://css-tricks.com/snippets/css/prevent-long-urls-from-breaking-out-of-container/ */
  .dont-break-out {
    /* These are technically the same, but use both */

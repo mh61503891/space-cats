@@ -21,21 +21,20 @@ class ContentsController < ApplicationController
 
   # GET /contents/:id
   def show
-    set_content
   end
 
   private
 
-    def set_contents
-      if params[:query].present?
-        @contents = Content.search(params[:query]).order(updated_at: :desc).page
-      else
-        @contents = Content.order(updated_at: :desc).page
-      end
+  def set_contents
+    if params[:query].present?
+      @contents = Content.search(params[:query]).order(updated_at: :desc).page
+    else
+      @contents = Content.order(updated_at: :desc).page(params[:page])
     end
+  end
 
-    def set_content
-      @content = Content.find_by!(id: params[:id])
-    end
+  def set_content
+    @content = Content.find_by!(id: params[:id])
+  end
 
 end

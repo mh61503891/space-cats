@@ -6,6 +6,8 @@ class Content < ApplicationRecord
   belongs_to :abstract_data, class_name: 'Blob', foreign_key: 'abstract_data_id', optional: true
   has_many :content_keywords
   has_many :keywords, through: :content_keywords
+  has_many :note_contents
+  has_many :notes, through: :note_contents
 
   include SearchCop
 

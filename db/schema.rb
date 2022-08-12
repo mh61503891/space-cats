@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_11_075842) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_12_025316) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -128,6 +128,30 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_11_075842) do
     t.index ["updated_at"], name: "index_keywords_on_updated_at"
   end
 
+  create_table "note_contents", force: :cascade do |t|
+    t.integer "note_id", null: false
+    t.integer "content_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["content_id"], name: "index_note_contents_on_content_id"
+    t.index ["note_id"], name: "index_note_contents_on_note_id"
+  end
+
+  create_table "note_keywords", force: :cascade do |t|
+    t.integer "note_id", null: false
+    t.integer "keyword_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["keyword_id"], name: "index_note_keywords_on_keyword_id"
+    t.index ["note_id"], name: "index_note_keywords_on_note_id"
+  end
+
+  create_table "notes", force: :cascade do |t|
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "settings", force: :cascade do |t|
     t.text "data"
     t.datetime "created_at", precision: nil, null: false
@@ -139,4 +163,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_11_075842) do
   add_foreign_key "content_keywords", "keywords"
   add_foreign_key "contents", "blobs", column: "abstract_data_id"
   add_foreign_key "contents", "blobs", column: "data_id"
+  add_foreign_key "note_contents", "contents"
+  add_foreign_key "note_contents", "notes"
+  add_foreign_key "note_keywords", "keywords"
+  add_foreign_key "note_keywords", "notes"
 end

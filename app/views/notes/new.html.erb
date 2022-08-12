@@ -1,0 +1,12 @@
+<%= turbo_frame_tag @note do %>
+
+<h1>New note</h1>
+newnew
+<%= render "form", note: @note %>
+
+<br>
+
+<div>
+  <%= link_to "Back to notes", notes_path %>
+</div>
+<% end %>

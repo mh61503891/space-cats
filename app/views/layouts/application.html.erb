@@ -7,11 +7,11 @@
     <title>Space Cats</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= stylesheet_link_tag 'application', media: 'all' %>
-    <%= javascript_include_tag 'application' %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
   </head>
   <body>
-    <%= render('shared/navbar') %>
+    <%= render("app/navbar") %>
     <div class="container my-3">
       <%= yield %>
     </div>

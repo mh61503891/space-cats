@@ -1,0 +1,13 @@
+<%= turbo_stream.update "new_note" %>
+<%= turbo_stream.prepend "notes" do %>
+  <%= render(
+    partial: "contents/notes/note",
+    locals: {
+      content: @content,
+      note: @note,
+    }
+  ) %>
+
+<% end %>
+
+<%= turbo_stream_flash %>

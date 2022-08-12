@@ -1,3 +1,6 @@
+require "openssl"
+OpenSSL::SSL::SSLContext::DEFAULT_PARAMS[:options] |= OpenSSL::SSL::OP_ALLOW_UNSAFE_LEGACY_RENEGOTIATION
+
 class CreateContentService
 
   def execute(uri)
@@ -9,7 +12,7 @@ class CreateContentService
       # TODO: countup
       return content
     end
-    content = MetaInspector.new(uri, allow_non_html_content: true)
+    content = MetaInspector.new(uri, allow_non_html_content: true, faraday_options: {ssl: {verify: false}})
     if content.response.success?
       if content.content_type.present?
         if Mime::Type.parse(content.content_type).any?{ |t| t.html? }
