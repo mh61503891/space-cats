@@ -27,25 +27,24 @@ gem "sprockets-rails"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'addressable', '~> 2.5'
-gem 'faraday', '~> 0.15'
-# gem 'ogp', '~> 0.2'
-gem 'delayed_job_active_record', '~> 4.1'
-gem 'daemons', '~> 1.2'
-gem 'foreman', '~> 0.64'
-gem 'delayed_job_web', '~> 1.4'
-gem 'search_cop', '~> 1.0'
-gem 'font-awesome-rails', '~> 4.7'
-gem 'metainspector', '~> 5.6'
-gem 'mime-types', '~> 3.2'
-gem 'ancestry', '~> 3.0'
-gem 'kaminari', '~> 1.1'
+gem 'addressable'
+gem 'faraday'
+gem 'delayed_job_active_record'
+gem 'daemons'
+gem 'foreman'
+gem 'delayed_job_web'
+gem 'search_cop'
+gem 'font-awesome-rails'
+gem 'metainspector'
+gem 'mime-types'
+gem 'ancestry'
+gem 'kaminari'
 
 gem 'bootsnap', '>= 1.1.0', require: false
 
 gem "bootstrap"
 gem "jquery-rails"
-gem "font-awesome-sass", "~> 6.1.1"
+gem "font-awesome-sass"
 
 
 group :development, :test do
