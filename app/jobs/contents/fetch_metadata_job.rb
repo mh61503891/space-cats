@@ -11,6 +11,10 @@ class Contents::FetchMetadataJob < ApplicationJob
       locals: { notice: "Fetch Metadata succeeded." }
     )
     content.broadcast_prepend_later_to("contents")
+    content.broadcast_update_later_to(
+      "content",
+      partial: "contents/content_detail"
+    )
   rescue => e
     Rails.logger.info(e)
     Rails.logger.info(e.backtrace.join("\n"))

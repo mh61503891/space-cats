@@ -19,7 +19,7 @@
       </p>
       <p class="mb-0">
         <% if content.og_description.present? %>
-          <%= content.og_description %>
+          <%= content.og_description.truncate(600) %>
         <% else %>
           <span class="placeholder bg-secondary col-12"></span>
         <% end %>

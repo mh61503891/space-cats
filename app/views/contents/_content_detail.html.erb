@@ -1,0 +1,84 @@
+<%= turbo_frame_tag(content) do %>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item" aria-current="page">
+        <%= link_to "Contents", contents_path, data: { turbo: false } %>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">
+        <%= content.og_title %>
+      </li>
+    </ol>
+  </nav>
+  <p class="lead">
+    <strong><%= content.og_title %></strong>
+  </p>
+  <% if content.abstract_data_id.present? %>
+    <div class="row justify-content-center">
+      <p class="col-lg-5 text-center">
+        <%= image_tag(blob_url(id: content.abstract_data_id), class: %w[img-fluid img-thumbnail]) %>
+      </p>
+    </div>
+  <% end %>
+  <div class="row">
+    <div class="col-6">
+      <h4>Metadata</h4>
+      <%= button_to(
+        content_fetch_metadata_path(content),
+        method: :patch,
+        class: %w[btn btn-warning]
+      ) do %>
+        <i class="bi bi-cloud-download"></i>
+        <span>Fetch Metadata</span>
+      <% end %>
+      <div class="m-3"></div>
+      <dl class="row">
+        <dt class="col-md-3">URL</dt>
+        <dd class="col-md-9 text-break"><%= link_to(content.url, content.url, target: "_blank", class: %w[form-control-plaintext col-sm-10]) %></dd>
+        <% if content.canonical_url.present? %>
+          <dt class="col-md-3">Canonical URL</dt>
+          <dd class="col-md-9 text-break"><%= link_to(content.canonical_url, content.canonical_url, target: "_blank") %></dd>
+        <% end %>
+        <dt class="col-md-3">Site Name</dt>
+        <dd class="col-md-9"><%= content.og_site_name %></dd>
+        <dt class="col-md-3">Title</dt>
+        <dd class="col-md-9"><%= content.og_title %></dd>
+        <dt class="col-md-3">Description</dt>
+        <dd class="col-md-9"><%= content.og_description %></dd>
+        <dt class="col-md-3">Labels</dt>
+        <dd class="col-md-9">
+          <ul>
+            <% content.keywords.each do |keyword| %>
+              <li><%= link_to keyword.name, keyword_path(keyword) %> (<%= keyword.contents.size %>)</li>
+            <% end %>
+          </ul>
+        </dd>
+        <dt class="col-md-3">Created at</dt>
+        <dd class="col-md-9"><%= content.created_at %></dd>
+        <dt class="col-md-3">Updated at</dt>
+        <dd class="col-md-9"><%= content.updated_at %></dd>
+        <dt class="col-md-3">Data size</dt>
+        <dd class="col-md-9"><%= content.data&.byte_size&.to_i / 1024 %> KiB</dd>
+      </dl>
+    </div>
+    <div class="col-6">
+      <h4>Notes</h4>
+      <%= link_to(
+        new_content_note_path(content),
+        class: %w[btn btn-primary],
+        data: { turbo_frame: dom_id(content.notes.build) }
+      ) do %>
+        <i class="bi bi-journal-text"></i>
+        <span>New note</span>
+      <% end %>
+      <%= turbo_frame_tag(content.notes.build) %>
+      <div id="notes" class="d-grid py-3 gap-3">
+        <%= render(
+          partial: "contents/notes/note",
+          collection: content.notes.order(created_at: :desc),
+          as: :note,
+          locals: { content: content }
+        ) %>
+      </div>
+    </div>
+  </div>
+<% end %>
