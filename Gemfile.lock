@@ -298,6 +298,9 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.8.2)
+    validate_url (1.0.15)
+      activemodel (>= 3.0.0)
+      public_suffix
     web-console (4.2.0)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -347,6 +350,7 @@ DEPENDENCIES
   stimulus-rails
   turbo-rails
   tzinfo-data
+  validate_url
   web-console (>= 3.3.0)
 
 RUBY VERSION

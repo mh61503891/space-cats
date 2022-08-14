@@ -1,0 +1,20 @@
+<% if notice %>
+  <div class="toast hide mt-3" data-controller="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="flex-grow-1 toast-body">
+        <%= notice %>
+      </div>
+      <button type="button" class="flex-shrink-0 btn-close m-2" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+<% end %>
+<% if alert %>
+  <div class="toast hide mt-3 bg-warning" data-controller="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="flex-grow-1 toast-body">
+        <%= alert %>
+      </div>
+      <button type="button" class="flex-shrink-0 btn-close m-2" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+<% end %>

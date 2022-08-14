@@ -1,13 +1,16 @@
 class Content < ApplicationRecord
 
-  enum media_type: { document: 0, image: 1 }
+  enum media_type: { unknown: 0, document: 1, image: 2 }
 
-  belongs_to :data, class_name: 'Blob', foreign_key: 'data_id'
-  belongs_to :abstract_data, class_name: 'Blob', foreign_key: 'abstract_data_id', optional: true
+  belongs_to :data, class_name: "Blob", foreign_key: "data_id", optional: true
+  belongs_to :abstract_data, class_name: "Blob", foreign_key: "abstract_data_id", optional: true
   has_many :content_keywords
   has_many :keywords, through: :content_keywords
   has_many :note_contents
   has_many :notes, through: :note_contents
+
+  validates :url, url: true
+  validates :canonical_url, url: true
 
   include SearchCop
 
@@ -31,28 +34,37 @@ class Content < ApplicationRecord
     ))
   end
 
-  # @params [Addressable::URI] uri
+  # @params [String] uri
   # @return [Content]
-  def self.get(uri)
+  def self.build(uri)
+    uri = Addressable::URI.parse(uri)
     content = nil
     content ||= Content.find_by(url: uri.display_uri.to_s)
     content ||= Content.find_by(url: canonize(uri).to_s)
+    if content.present?
+      content.input_count += 1
+    else
+      content = Content.new(
+        url: uri.display_uri.to_s,
+        canonical_url: canonize(uri).to_s,
+      )
+    end
     return content
   end
 
-  # TODO: implements
   # @params [Addressable::URI] uri
   # @return [Addressable::URI]
   def self.canonize(uri)
     uri.normalize!
     if uri.query_values.present?
       query_values = uri.query_values
-      # TODO: refactor
+      # @see MetaInspector::URL::WELL_KNOWN_TRACKING_PARAMS
       %w[
-        utm_campaign
-        utm_medium
         utm_source
+        utm_medium
+        utm_term
         utm_content
+        utm_campaign
         fbclid
       ].each do |key|
         query_values.delete(key)
@@ -62,6 +74,8 @@ class Content < ApplicationRecord
     return uri
   end
 
-  # https://www.slideshare.net from_action
+  def fetch_metadata!
+    Contents::FetchMetadataService.new(self).execute!
+  end
 
 end

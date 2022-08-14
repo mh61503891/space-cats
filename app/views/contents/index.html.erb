@@ -1,18 +1,9 @@
-<%= render("shared/alert_flash") %>
-<%= form_with(
-  local: true,
-  method: :post,
-  url: contents_path,
-  html: {
-    class: %w[form-inline mb-3]
-  }) do |f| %>
-  <div class="input-group">
-    <%= f.text_field(:url, class: %w[form-control], placeholder: "URL", autocomplete: "off") %>
-    <%= f.button(class: %w[btn btn-primary]) do %>
-      <i class="fa-fw fa-solid fa-plus"></i>
-    <% end %>
-  </div>
+<%= turbo_frame_tag(Content.new) do %>
+  <%= render("form", content: Content.new) %>
 <% end %>
 <p><%= page_entries_info(@contents) %></p>
-<%= render(@contents) %>
+<%= turbo_stream_from("contents") %>
+<div id="contents">
+  <%= render(@contents) %>
+</div>
 <%= paginate(@contents) %>

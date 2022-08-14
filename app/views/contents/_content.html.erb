@@ -1,19 +1,41 @@
-<div class="d-flex">
-  <div class="flex-shrink-0">
-    <% if content.abstract_data_id.present? %>
-      <%= image_tag(blob_url(id: content.abstract_data_id), class: %w[align-self-start mr-2 img-thumbnail], size: "64x64") %>
-    <% else %>
-      <%= image_tag(blank_blobs_url, class: %w[align-self-start mr-2 img-thumbnail], size: "64x64") %>
-    <% end %>
+<%= turbo_frame_tag(content) do %>
+  <div class="d-flex">
+    <div class="flex-shrink-0">
+      <% if content.abstract_data_id.present? %>
+        <%= image_tag(blob_url(id: content.abstract_data_id), class: %w[align-self-start mr-2 img-thumbnail], size: "64x64") %>
+      <% else %>
+        <%= image_tag(blank_blobs_url, class: %w[align-self-start mr-2 img-thumbnail], size: "64x64") %>
+      <% end %>
+    </div>
+    <div class="flex-grow-1 ms-3">
+      <p class="mb-1 lead">
+        <strong>
+          <% if content.og_title.present? %>
+            <%= content.og_title %>
+          <% else %>
+            <span class="placeholder bg-secondary col-12"></span>
+          <% end %>
+        </strong>
+      </p>
+      <p class="mb-0">
+        <% if content.og_description.present? %>
+          <%= content.og_description %>
+        <% else %>
+          <span class="placeholder bg-secondary col-12"></span>
+        <% end %>
+      </p>
+      <p class="mb-0 dont-break-out">
+        <% if content.canonical_url.present? %>
+          <%= link_to(content.canonical_url, content.canonical_url) %>
+        <% else %>
+          <span class="placeholder bg-secondary col-12"></span>
+        <% end %>
+      </p>
+      <p class="text-right">
+        <span class="badge rounded-pill text-bg-light">In: <%= content.input_count %></span>
+        <span class="badge rounded-pill text-bg-light">Out: <%= content.output_count %></span>
+        <%= link_to(content.created_at, content, data: { turbo: false }) %>
+      </p>
+    </div>
   </div>
-  <div class="flex-grow-1 ms-3">
-    <p class="mb-1 lead"><strong><%= content.og_title %></strong></p>
-    <p class="mb-0"><%= content.og_description %></p>
-    <p class="mb-0 dont-break-out"><%= link_to content.canonical_url, content.canonical_url %></p>
-    <p class="text-right">
-      <span class="badge rounded-pill text-bg-light">In: <%= content.input_count %></span>
-      <span class="badge rounded-pill text-bg-light">Out: <%= content.output_count %></span>
-      <%= link_to content.created_at, content %>
-    </p>
-  </div>
-</div>
+<% end %>

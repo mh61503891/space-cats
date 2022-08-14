@@ -1,40 +1,51 @@
 class ContentsController < ApplicationController
 
-  before_action :set_contents, only: [:index, :create]
+  before_action :set_contents, only: [:index]
   before_action :set_content, only: [:show]
 
   # GET /contents
   def index
   end
 
+  # GET /contents/:id
+  def show
+  end
+
+  # GET /contents/new
+  def new
+    @content = Content.new
+  end
+
   # POST /contents
   def create
-    @query = params[:query]
-    if @query.present?
-      render :index
-    end
-    if params[:url].present?
-      FetchJob.perform_now(params[:url])
-      redirect_to :contents
+    @content = Content.build(content_params[:url])
+    if @content.save
+      Contents::FetchMetadataJob.perform_later(@content)
+      flash.now.notice = "Content was successfully created."
+    else
+      flash.now.alert = @content.errors.full_messages.join(".")
+      render turbo_stream: turbo_stream.update("flash", partial: "app/flash")
     end
   end
 
-  # GET /contents/:id
-  def show
+  # PATCH /contents/:id/fetch_metadata
+  def fetch_metadata
+    @content = Content.find_by!(id: params[:content_id])
+    Contents::FetchMetadataJob.perform_later(@content)
   end
 
   private
 
   def set_contents
-    if params[:query].present?
-      @contents = Content.search(params[:query]).order(updated_at: :desc).page
-    else
-      @contents = Content.order(updated_at: :desc).page(params[:page])
-    end
+    @contents = Content.order(updated_at: :desc).page(params[:page])
   end
 
   def set_content
     @content = Content.find_by!(id: params[:id])
+  end
+
+  def content_params
+    params.require(:content).permit(:url)
   end
 
 end

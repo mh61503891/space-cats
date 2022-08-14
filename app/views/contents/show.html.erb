@@ -19,8 +19,10 @@
 <dl class="row">
   <dt class="col-sm-3">URL</dt>
   <dd class="col-sm-9"><%= link_to(@content.url, @content.url, target: "_blank", class: %w[form-control-plaintext col-sm-10]) %></dd>
-  <dt class="col-sm-3">Canonical URL</dt>
-  <dd class="col-sm-9"><%= link_to(@content.canonical_url, @content.canonical_url, target: "_blank") %></dd>
+  <% if @content.canonical_url.present? %>
+    <dt class="col-sm-3">Canonical URL</dt>
+    <dd class="col-sm-9"><%= link_to(@content.canonical_url, @content.canonical_url, target: "_blank") %></dd>
+  <% end %>
   <dt class="col-sm-3">Site Name</dt>
   <dd class="col-sm-9"><%= @content.og_site_name %></dd>
   <dt class="col-sm-3">Title</dt>
@@ -39,6 +41,8 @@
   <dd class="col-sm-9"><%= @content.created_at %></dd>
   <dt class="col-sm-3">Updated at</dt>
   <dd class="col-sm-9"><%= @content.updated_at %></dd>
+  <dt class="col-sm-3">Data byte_size</dt>
+  <dd class="col-sm-9"><%= @content.data&.byte_size %></dd>
   <dt class="col-sm-3">Notes</dt>
 </dl>
 <% if Addressable::URI.parse(@content.url).host == 'www.slideshare.net' %>
@@ -48,6 +52,12 @@
     </strong> de <strong><a href="https://www.slideshare.net/carologic" target="_blank">Carol Smith</a></strong>
   </div>
 <% end %>
+<%= button_to(
+  "Fetch Metadata",
+  content_fetch_metadata_path(@content),
+  method: :patch,
+  class: %w[btn btn-warning]
+) %>
 <hr>
 <h2>Notes</h2>
 <%= link_to(
@@ -64,7 +74,4 @@
     as: :note,
     locals: { content: @content }
   ) %>
-</div>
-<div id="flash">
-  <%= render partial: "shared/flash" %>
 </div>

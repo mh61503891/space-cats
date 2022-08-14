@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :notes
   root to: 'contents#index'
   resources :contents do
+    patch :fetch_metadata
     resources :notes, controller: "contents/notes"
   end
   resources :blobs, only: [:show] do

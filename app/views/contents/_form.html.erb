@@ -1,0 +1,13 @@
+<%= form_with(
+    model: content,
+    html: {
+      class: %w[form-inline mb-3]
+    }
+  ) do |f| %>
+  <div class="input-group">
+    <%= f.text_field(:url, class: %w[form-control], placeholder: "URL", autocomplete: "off") %>
+    <%= f.button(class: %w[btn btn-primary]) do %>
+      <i class="fa-fw fa-solid fa-plus"></i>
+    <% end %>
+  </div>
+<% end %>

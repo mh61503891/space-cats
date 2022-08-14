@@ -1,0 +1,5 @@
+<%= turbo_stream.update(Content.new) do %>
+  <%= render("form", content: Content.new) %>
+<% end %>
+<%= turbo_stream.prepend("contents", @content) %>
+<%= turbo_stream_flash %>
