@@ -1,7 +1,7 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.1.2'
+ruby "3.1.2"
 
 gem "rails", "~> 7.0.3", ">= 7.0.3.1"
 gem "sprockets-rails"
@@ -33,39 +33,39 @@ gem "validate_url"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'addressable'
-gem 'faraday'
-gem 'delayed_job_active_record'
-gem 'daemons'
-gem 'foreman'
-gem 'delayed_job_web'
-gem 'search_cop'
-gem 'metainspector'
-gem 'mime-types'
-gem 'ancestry'
-gem 'kaminari'
+gem "addressable"
+gem "faraday"
+gem "delayed_job_active_record"
+gem "daemons"
+gem "foreman"
+gem "delayed_job_web"
+gem "search_cop"
+gem "metainspector"
+gem "mime-types"
+gem "ancestry"
+gem "kaminari"
 
-gem 'bootsnap', '>= 1.1.0', require: false
+gem "bootsnap", ">= 1.1.0", require: false
 
 # gem "bootstrap"
 gem "jquery-rails"
 
 group :development, :test do
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
 end
 
 group :development do
-  gem 'web-console', '>= 3.3.0'
-  gem 'listen', '>= 3.0.5', '< 3.2'
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'pry-rails'
+  gem "web-console", ">= 3.3.0"
+  gem "listen", ">= 3.0.5", "< 3.2"
+  gem "spring"
+  gem "spring-watcher-listen", "~> 2.0.0"
+  gem "pry-rails"
 end
 
 group :test do
-  gem 'capybara', '>= 2.15'
-  gem 'selenium-webdriver'
-  gem 'chromedriver-helper'
+  gem "capybara", ">= 2.15"
+  gem "selenium-webdriver"
+  gem "chromedriver-helper"
 end
 
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
