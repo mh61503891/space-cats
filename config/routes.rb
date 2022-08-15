@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
+  root to: "search#index"
+  namespace :search do
+    get :index
+    post :index
+  end
   resources :notes
-  root to: 'contents#index'
   resources :contents do
     patch :fetch_metadata
     resources :notes, controller: "contents/notes"

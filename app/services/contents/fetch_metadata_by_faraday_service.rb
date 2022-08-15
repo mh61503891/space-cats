@@ -1,6 +1,19 @@
 require "openssl"
 OpenSSL::SSL::SSLContext::DEFAULT_PARAMS[:options] |= OpenSSL::SSL::OP_ALLOW_UNSAFE_LEGACY_RENEGOTIATION
 
+module MetaInspector
+  class Request
+    def read
+      return unless response
+      body = response.body
+      body = body.encode!(@encoding, @encoding, :invalid => :replace) if @encoding
+      body.scrub.tr("\000", '')
+    rescue ArgumentError => e
+      raise MetaInspector::RequestError.new(e)
+    end
+  end
+end
+
 class Contents::FetchMetadataByFaradayService
 
   def initialize(content)

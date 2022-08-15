@@ -5,24 +5,16 @@ class KeywordsController < ApplicationController
     @keywords = Keyword.order(updated_at: :desc)
   end
 
-  # POST /keywords
-  def create
-    @query = params[:query]
-    if @query.present?
-      @keywords = Keyword.search(@query).order(updated_at: :desc)
-      render :index
-    end
-    if params[:keyword].present?
-      @keywords = Keyword.order(updated_at: :desc)
-      @keyword = Keyword.find_or_create_by!(name: params[:keyword])
-      AssignKeywordsService.new.execute
-      redirect_to :keywords
-    end
-  end
-
   # GET /keywords/:id
   def show
     @keyword = Keyword.find_by!(id: params[:id])
+  end
+  
+  # POST /keywords
+  def create
+    @keyword = Keyword.find_or_create_by!(name: keyword_params[:name])
+    AssignKeywordsService.new.execute
+    redirect_to :keywords
   end
 
   # POST /keywords/assign
@@ -31,11 +23,17 @@ class KeywordsController < ApplicationController
     redirect_to :keywords
   end
 
+  # DELETE /keywords/:id
   def destroy
     @keyword = Keyword.find_by(id: params[:id])
-    # @keyword.content_keywords.destroy
     @keyword.destroy
     redirect_to :keywords
+  end
+
+  private 
+
+  def keyword_params
+    params.require(:keyword).permit(:name)
   end
 
 end

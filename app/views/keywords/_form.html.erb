@@ -1,0 +1,11 @@
+<%= form_with(
+  model: keyword,
+  html: { class: %w[form-inline] }
+  ) do |f| %>
+  <div class="input-group">
+    <%= f.text_field(:name, class: %w[form-control], placeholder: "Keyword", autocomplete: "off") %>
+    <%= f.button(class: %w[btn btn-primary]) do %>
+      <i class="bi bi-plus-lg"></i>
+    <% end %>
+  </div>
+<% end %>

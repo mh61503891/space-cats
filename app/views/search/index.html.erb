@@ -1,0 +1,28 @@
+<%= form_with(
+  local: true,
+  method: :post,
+  url: search_index_path,
+  html: { class: %w[form-inline mb-3] },
+  data: { turbo: false }
+  ) do |f| %>
+  <div class="input-group">
+    <%= f.text_field(:query, class: %w[form-control], placeholder: "Keywords", autocomplete: "off", value: @query) %>
+    <%= f.button(class: %w[btn btn-primary]) do %>
+      <i class="bi bi-search"></i>
+    <% end %>
+  </div>
+<% end %>
+<div class="row">
+  <div class="col-6">
+    <% if @contents.present? %>
+      <h5>Contents (<%= @contents.size %>)</h5>
+      <%= render(partial: "contents/content", collection: @contents) %>
+    <% end %>
+  </div>
+  <div class="col-6">
+    <% if @keywords.present? %>
+      <h5>Keywords (<%= @keywords.size %>)</h5>
+      <%= render(partial: "keywords/keyword", collection: @keywords) %>
+    <% end %>
+  </div>
+</div>

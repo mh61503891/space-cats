@@ -66,6 +66,8 @@ class Content < ApplicationRecord
         utm_content
         utm_campaign
         fbclid
+        gclid
+        yclid
       ].each do |key|
         query_values.delete(key)
       end
