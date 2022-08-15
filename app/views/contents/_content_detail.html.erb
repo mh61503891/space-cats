@@ -57,7 +57,7 @@
         <dt class="col-md-3">Updated at</dt>
         <dd class="col-md-9"><%= content.updated_at %></dd>
         <dt class="col-md-3">Data size</dt>
-        <dd class="col-md-9"><%= content.data&.byte_size&.to_i / 1024 %> KiB</dd>
+        <dd class="col-md-9"><%= content.data&.byte_size.to_i / 1024 %> KiB</dd>
       </dl>
     </div>
     <div class="col-6">

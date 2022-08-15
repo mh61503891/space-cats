@@ -1,7 +1,7 @@
 <%= turbo_frame_tag(Content.new) do %>
   <%= render("form", content: Content.new) %>
 <% end %>
-<p><%= page_entries_info(@contents) %></p>
+<p class="mt-3"><%= page_entries_info(@contents) %></p>
 <%= turbo_stream_from("contents") %>
 <div id="contents">
   <%= render(@contents) %>
