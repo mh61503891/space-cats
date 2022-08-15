@@ -1,5 +1,4 @@
 <%= render('shared/alert_flash') %>
-
 <%= form_with(
   local: true,
   method: :post,
@@ -7,14 +6,13 @@
   html: {
     class: %w[form-inline mb-3]
   }) do |f| %>
-<div class="input-group">
-  <%= f.text_field :query, class: %w[form-control], placeholder: 'Keywords', autocomplete: 'off', value: @query %>
-  <div class="input-group-append">
-    <%= f.button 'Search', class: %w[btn btn-primary] %>
+  <div class="input-group">
+    <%= f.text_field :query, class: %w[form-control], placeholder: 'Keywords', autocomplete: 'off', value: @query %>
+    <div class="input-group-append">
+      <%= f.button 'Search', class: %w[btn btn-primary] %>
+    </div>
   </div>
-</div>
 <% end %>
-
 <%= form_with(
   local: true,
   method: :post,
@@ -22,14 +20,13 @@
   html: {
     class: %w[form-inline mb-3]
   }) do |f| %>
-<div class="input-group">
-  <%= f.text_field :keyword, class: %w[form-control], placeholder: 'Keyword', autocomplete: 'off' %>
-  <div class="input-group-append">
-    <%= f.button 'Add', class: %w[btn btn-primary] %>
+  <div class="input-group">
+    <%= f.text_field :keyword, class: %w[form-control], placeholder: 'Keyword', autocomplete: 'off' %>
+    <div class="input-group-append">
+      <%= f.button 'Add', class: %w[btn btn-primary] %>
+    </div>
   </div>
-</div>
 <% end %>
-
 <%= form_with(
   local: true,
   method: :post,
@@ -37,13 +34,12 @@
   html: {
     class: %w[form-inline mb-3]
   }) do |f| %>
-<div class="input-group">
-  <%= f.button 'Assign', class: %w[btn btn-primary] %>
-</div>
+  <div class="input-group">
+    <%= f.button 'Assign', class: %w[btn btn-primary] %>
+  </div>
 <% end %>
-
 <ul>
-<% @keywords.each do |keyword| %>
-  <li><%= link_to keyword.name, keyword_path(keyword) %> (<%= keyword.contents.size %>)</li>
-<% end %>
+  <% @keywords.each do |keyword| %>
+    <li><%= link_to keyword.name, keyword_path(keyword) %> (<%= keyword.contents.size %>)</li>
+  <% end %>
 </ul>
