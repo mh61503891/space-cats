@@ -25,6 +25,7 @@ gem "addressable"
 gem "faraday"
 gem "metainspector"
 gem "mime-types"
+gem "marcel"
 
 gem "delayed_job_active_record"
 gem "delayed_job_web"
