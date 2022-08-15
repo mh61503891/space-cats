@@ -67,7 +67,7 @@ class Contents::FetchMetadataByFaradayService
       canonical_url: Content.canonize(Addressable::URI.parse(page.untracked_url)),
       og_title: page.best_title,
       og_author: page.best_author,
-      og_description: page.best_description,
+      og_description: page.best_description || page.h1.map { |h1| "§ #{h1}" }.join(" "),
       og_image: Addressable::URI.parse(page.images.best),
       og_type: page.meta.dig("og:type"),
       og_url: page.meta.dig("og:url"),
@@ -108,7 +108,7 @@ class Contents::FetchMetadataByFaradayService
   # @params [Addressable::URI] uri
   # @return [Blob or NilClass]
   def wget_blob(uri)
-    res = Faraday.get(uri.normalize)
+    res = Faraday.get(uri)
     if !res.success? || res.body.blank?
       return nil
     else

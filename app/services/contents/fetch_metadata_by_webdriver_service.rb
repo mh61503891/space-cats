@@ -31,7 +31,7 @@ class Contents::FetchMetadataByWebdriverService
     options.add_argument("--lang=ja")
     options.add_argument("--user-agent=#{USER_AGENT}")
     driver = Selenium::WebDriver.for(:chrome, options: options)
-    driver.get(uri.normalize.to_s)
+    driver.get(uri.to_s)
     sleep(SLEEP_SEC)
     return driver.page_source
   end
@@ -47,7 +47,7 @@ class Contents::FetchMetadataByWebdriverService
       canonical_url: Content.canonize(Addressable::URI.parse(page.untracked_url)),
       og_title: page.best_title,
       og_author: page.best_author,
-      og_description: page.best_description,
+      og_description: page.best_description || page.h1.map { |h1| "§ #{h1}" }.join(" "),
       og_image: Addressable::URI.parse(page.images.best),
       og_type: page.meta.dig("og:type"),
       og_url: page.meta.dig("og:url"),
