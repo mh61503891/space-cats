@@ -24,5 +24,9 @@
       <h5>Keywords (<%= @keywords.size %>)</h5>
       <%= render(partial: "keywords/keyword", collection: @keywords) %>
     <% end %>
+    <% if @notes.present? %>
+      <h5>Notes (<%= @notes.size %>)</h5>
+      <%= render(partial: "notes/note", collection: @notes) %>
+    <% end %>
   </div>
 </div>
