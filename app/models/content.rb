@@ -73,6 +73,11 @@ class Content < ApplicationRecord
       end
       uri.query_values = query_values.presence
     end
+    # TODO refactor
+    # for Amazon
+    if uri.host == "www.amazon.co.jp"
+      uri.path = uri.path.scan(/\/dp\/[A-Z0-9]{10}/).first
+    end
     return uri
   end
 

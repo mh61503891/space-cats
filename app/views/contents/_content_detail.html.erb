@@ -82,3 +82,27 @@
     </div>
   </div>
 <% end %>
+<div class="row">
+  <div class="col-6">
+    <%= link_to(
+      blob_path(content.data_id),
+      class: %w[btn btn-warning],
+      target: "_blank",
+    ) do %>
+      <i class="bi bi-archive"></i>
+      <span>Cache</span>
+      <i class="bi bi-arrow-up-right-square"></i>
+    <% end %>
+    <%= button_to(
+      content_path(content),
+      class: %w[btn btn-danger mt-3],
+      method: :delete,
+      form: { data: { turbo_confirm: "Are you sure?" } },
+    ) do %>
+      <i class="bi bi-trash"></i>
+      <span>Destroy</span>
+    <% end %>
+  </div>
+  <div class="col-6">
+  </div>
+</div>

@@ -34,6 +34,13 @@ class ContentsController < ApplicationController
     Contents::FetchMetadataJob.perform_later(@content)
   end
 
+  # DELETE /contents/:id
+  def destroy
+    @content = Content.find_by!(id: params[:id])
+    @content.destroy
+    redirect_to :contents
+  end
+
   private
 
   def set_contents
