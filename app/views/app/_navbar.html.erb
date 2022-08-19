@@ -5,26 +5,38 @@
       <ul class="navbar-nav">
         <li class="nav-item">
           <%= link_to(contents_path, class: %w[nav-link d-sm-none d-md-inline-block]) do %>
+            <i class="bi bi-bookmarks"></i>
             <span class="text-nowrap">Contents (<%= Content.count %>)</span>
           <% end %>
           <%= link_to(contents_path, class: %w[nav-link d-none d-sm-inline-block d-md-none], title: "Contents", "data-toggle": "tooltip", "data-placement": "bottom") do %>
-            <i class="fa fa-tags fa-fw" aria-hidden="true"></i>
+            <i class="bi bi-bookmarks"></i>
           <% end %>
         </li>
         <li class="nav-item">
           <%= link_to(keywords_path, class: %w[nav-link d-sm-none d-md-inline-block]) do %>
+            <i class="bi bi-tags"></i>
             <span class="text-nowrap">Keywords (<%= Keyword.count %>)</span>
           <% end %>
           <%= link_to(keywords_path, class: %w[nav-link d-none d-sm-inline-block d-md-none], title: "Keywords", "data-toggle": "tooltip", "data-placement": "bottom") do %>
-            <i class="fa fa-tags fa-fw" aria-hidden="true"></i>
+            <i class="bi bi-tags"></i>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to(notes_path, class: %w[nav-link d-sm-none d-md-inline-block]) do %>
+            <i class="bi bi-journals"></i>
+            <span class="text-nowrap">Notes (<%= Note.count %>)</span>
+          <% end %>
+          <%= link_to(notes_path, class: %w[nav-link d-none d-sm-inline-block d-md-none], title: "Notes", "data-toggle": "tooltip", "data-placement": "bottom") do %>
+            <i class="bi bi-journals"></i>
           <% end %>
         </li>
         <li class="nav-item">
           <a class="nav-link d-sm-none d-md-inline-block" href="/jobs" target="_blank">
+            <i class="bi bi-list-task"></i>
             <span class="text-nowrap">Jobs</span>
           </a>
           <a class="nav-link d-none d-sm-inline-block d-md-none" data-toggle="tooltip" data-placement="bottom" title="Jobs" href="/jobs" target="_blank">
-            <i class="fa fa-calendar fa-fw" aria-hidden="true"></i>
+            <i class="bi bi-list-task"></i>
           </a>
         </li>
       </ul>
