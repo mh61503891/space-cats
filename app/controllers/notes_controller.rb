@@ -1,9 +1,10 @@
 class NotesController < ApplicationController
+
   before_action :set_note, only: %i[ show edit update destroy ]
 
   # GET /notes
   def index
-    @notes = Note.all
+    @notes = Note.all.includes(:note_contents, :contents).order(created_at: :desc)
   end
 
   # GET /notes/1
@@ -22,7 +23,6 @@ class NotesController < ApplicationController
   # POST /notes
   def create
     @note = Note.new(note_params)
-
     if @note.save
       redirect_to @note, notice: "Note was successfully created."
     else
@@ -46,13 +46,13 @@ class NotesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_note
-      @note = Note.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def note_params
-      params.require(:note).permit(:body)
-    end
+  def set_note
+    @note = Note.find(params[:id])
+  end
+
+  def note_params
+    params.require(:note).permit(:body)
+  end
+
 end

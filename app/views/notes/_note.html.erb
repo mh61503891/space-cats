@@ -1,7 +1,11 @@
-<div id="<%= dom_id note %>">
-  <p>
-    <strong>Body:</strong>
-    <%= note.body %>
-  </p>
-
+<div id="<%= dom_id(note) %>" class="card">
+  <div class="card-body">
+    <p class="card-text">
+      <%= note.body %>
+    </p>
+    <p><%= note.created_at %></p>
+    <% note.contents.each do |content| %>
+      <%= link_to(content.og_title, content, class: %w[card-link]) %>
+    <% end %>
+  </div>
 </div>
