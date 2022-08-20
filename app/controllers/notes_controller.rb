@@ -24,8 +24,9 @@ class NotesController < ApplicationController
   def create
     @note = Note.new(note_params)
     if @note.save
-      redirect_to @note, notice: "Note was successfully created."
+      flash.now.notice = "Note was successfully created."
     else
+      flash.now.alert = @note.errors.full_messages.join(".")
       render :new, status: :unprocessable_entity
     end
   end
@@ -42,7 +43,7 @@ class NotesController < ApplicationController
   # DELETE /notes/1
   def destroy
     @note.destroy
-    redirect_to notes_url, notice: "Note was successfully destroyed."
+    flash.now.notice = "Note was successfully destroyed."
   end
 
   private

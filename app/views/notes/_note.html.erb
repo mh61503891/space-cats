@@ -7,5 +7,16 @@
     <% note.contents.each do |content| %>
       <%= link_to(content.og_title, content, class: %w[card-link]) %>
     <% end %>
+    <div class="nav justify-content-end">
+      <%= button_to(
+      note,
+      method: :delete,
+      class: %w[btn btn-sm btn-danger],
+      form: { data: { turbo_confirm: "Are you sure?" } }
+    ) do %>
+        <i class="bi bi-trash"></i>
+        <span>Destroy note</span>
+      <% end %>
+    </div>
   </div>
 </div>

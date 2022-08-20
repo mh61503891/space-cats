@@ -1,0 +1,40 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item" aria-current="page">
+      <%= link_to "Contents", contents_path, data: { turbo: false } %>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">
+      Import
+    </li>
+  </ol>
+</nav>
+<%= form_with(
+  url: contents_import_path,
+  method: :post,
+  local: true,
+  class: %w[row g-3],
+  ) do |f| %>
+  <div class="col-12">
+    <%= f.label(:file, class: %w[form-label]) %>
+    <%= f.file_field(:file, class: %w[form-control]) %>
+  </div>
+  <div class="col-12">
+    <%= f.submit(class: %w[btn btn-primary], data: { turbo: false }) %>
+  </div>
+<% end %>
+<table class="table">
+  <thead>
+    <tr>
+      <td>URL</td>
+      <td>Errors</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @contents.each do |content| %>
+      <tr>
+        <td class="text-break"><%= content.canonical_url %></td>
+        <td class="text-break"><%= content.errors.full_messages.join(".") %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -32,6 +32,7 @@ class ContentsController < ApplicationController
   def fetch_metadata
     @content = Content.find_by!(id: params[:content_id])
     Contents::FetchMetadataJob.perform_later(@content)
+    head :no_content
   end
 
   # DELETE /contents/:id

@@ -5,6 +5,9 @@ Rails.application.routes.draw do
     post :index
   end
   resources :notes
+  namespace :contents do
+    resource :import
+  end
   resources :contents do
     patch :fetch_metadata
     resources :notes, controller: "contents/notes"

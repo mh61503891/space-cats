@@ -9,3 +9,8 @@
     <% end %>
   </div>
 <% end %>
+<div class="m-3"></div>
+<%= link_to(contents_import_path, class: %w[btn btn-warning], data: { turbo: false }) do %>
+  <i class="bi bi-file-arrow-up"></i>
+  <span>Import</span>
+<% end %>

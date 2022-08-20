@@ -1,0 +1,3 @@
+<%= turbo_stream.update("new_note", nil) %>
+<%= turbo_stream.prepend("notes", @note) %>
+<%= turbo_stream_flash %>
